@@ -111,6 +111,14 @@ Specifically, the **SWL** pre-processing combination (baseline + stop words remo
 --- 
 
 ## 📂 Repository Content
+- **`model_2SWL.z01` to `model_2SWL.z08`:** `.zip` archives containing the compressed `model_2SWL.keras`, trained on the best dataset configuration achieved during the project (second data augmentation strategy, SWL pre-processing strategy);
+- **`tunedEmbModel.zip`:** archive containing the compressed `tunedEmbModel.keras`. This model is the result of the hyperparameters tuning process described in the *`LSTM_NetworkDAIGT_Tuning.ipynb`* notebook;
+- **`model.png`:** final model architecture after hyperparameters tuning;
+- **`Datasets/`:** folder containing various project datasets in `.csv` format;
+- **`Histories/`:** folder containing training and validation metrics for models trained on different dataset versions, in `.csv format`;
+- **`Notebooks/`:** folder containing all project's Jupyter Notebooks (`.ipynb` files);
+- **`Results/`:** folder containing  testing metrics for models trained on different dataset versions, saved in `.csv` format;
+- **`Tuning Results/`:** folder containing the `.txt` reports generated during the hyperparameters tuning process;
 
 ---
 
