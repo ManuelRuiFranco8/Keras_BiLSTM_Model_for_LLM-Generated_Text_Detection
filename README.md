@@ -39,6 +39,8 @@ Augmented datasets are saved in `.csv` format:
 - **`training_set.csv`:** dataset built with only the 2 original Kaggle prompts (augmentation strategy 1);
 - **`training_set2.csv`:** dataset built with 15 different prompts (augmentation strategy 2); <br>
 
+<br>
+
 **Text Pre-processing Operations** <br>
 - **Normalization:** converting numbers to characters, expanding contractions, removing punctuation and extra spaces, removing non-standard alphabetical characters, and
   converting to lowercase;
@@ -65,42 +67,44 @@ The six different pre-processing strategies are also applied to the test, result
 ---
 
 ## 🧠 Model Architecture
-The LSTM_NetworkDAIGT.ipynb notebook is dedicated to dataset splitting, text vectorization, embedding, 
-DNN architecture definition, training, validation, and testing. 
-Pe-processed text samples are divided into training, validation, and testing sets. For smaller datasets (augmentation strategy 1), we have dealt with the lower number of samples by reserving 80% of the datasets for training with K-fold validation, and the remaining 20% of samples for tests. For larger datasets (augmentation strategy 2), a 70% training, 15% validation, and 15% testing split is used.
+The *`LSTM_NetworkDAIGT.ipynb`* notebook is dedicated to dataset splitting, text vectorization, embedding, DNN architecture definition, training, validation, and testing.<br> 
+Pe-processed text samples are divided into training, validation, and testing sets. For smaller datasets (augmentation strategy 1), we have dealt with the lower number of samples by reserving 80% of the datasets for training with K-fold validation, and the remaining 20% of samples for tests. For larger datasets (augmentation strategy 2), a 70% training, 15% validation, and 15% testing split is used. <br>
 The model adopts a sequential architecture and includes the following layers:
-•	Text Vectorization Layer (Encoder): implemented using tf.keras.layers.TextVectorization, it converts raw token sequences into a numerical format, creating a vocabulary of integer indexes for the most frequent words. It’s configured with VOCAB_SIZE=10,000 (number of unique words) and output_sequence_length=SAMPLE_LENGTH (a predefined length to which all input sequences are padded or truncated);
-•	Embedding Layer (Word Embedding): implemented using tf.keras.layers.Embedding, it associates each vocabulary index with a vector of floating-point vectors, learning dense representations of words which should capture semantic relationships between words. The dimensionality of these word vectors is set by EMBEDDING_DIM=3000;
-•	Bidirectional LSTM Layers (at least one): the core of the model consists of one or more tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(...)) layers. Bidirectional LSTMs process the input text sequence in both forward and backward directions, allowing the model to capture dependencies and context from both past and future words in a sequence. Dropout is applied to these layers to mitigate overfitting;
-•	Dense Layers (at least one): the model is terminated by one or more tf.keras.layers.Dense (fully-connected) layers. The final Dense layer uses a sigmoid activation function, outputting a value between 0 and 1, which represents the probability that the input text is AI-generated (label 1) or human-written (label 0). If present, non-terminal dense layer applies ReLU activation function and L2 regularization;
-The defined model is trained and validated with BATCH_SIZE=64. Two strategies can be followed:
-1.	Working with smaller datasets (data augmentation strategy 1), the model is subjected to K-fold validation (with K=4), being trained 3 epochs for each fold;
-2.	Working with larger datasets (data augmentation strategy 2), the model is trained for 5 epochs and then validated on the previously held-out validation set; 
-For both strategies, loss function and accuracy are displayed as training and validation metrics.
-Finally, the model is tested on both the held-out test set and the test sets assembled in the DataAugmentation&Preprocessing.ipynb notebook. The following testing metrics are shown: Loss, Accuracy, Precision, Recall (Sensitivity), F1-Score, Confusion Matrix, ROC (Receiver Operating Characteristic) Curve, AUC (Area Under ROC Curve).
+- **Text Vectorization Layer (Encoder):** implemented using `tf.keras.layers.TextVectorization`, it converts raw token sequences into a numerical format, creating a vocabulary of integer indexes for the most frequent words. It’s configured with `VOCAB_SIZE=10,000` (number of unique words) and `output_sequence_length=SAMPLE_LENGTH` (a predefined length to which all input sequences are padded or truncated);
+- **Embedding Layer (Word Embedding):** implemented using `tf.keras.layers.Embedding`, it associates each vocabulary index with a vector of floating-point vectors, learning dense representations of words which should capture semantic relationships between words. The dimensionality of these word vectors is set by `EMBEDDING_DIM=3000`;
+- **Bidirectional LSTM Layers (at least one):** the core of the model consists of one or more `tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(...))` layers. Bidirectional LSTMs process the input text sequence in both forward and backward directions, allowing the model to capture dependencies and context from both past and future words in a sequence. Dropout is applied to these layers to mitigate overfitting;
+- **Dense Layers (at least one):** the model is terminated by one or more `tf.keras.layers.Dense` (fully-connected) layers. The final Dense layer uses a sigmoid activation function, outputting a value between 0 and 1, which represents the probability that the input text is AI-generated (label 1) or human-written (label 0). If present, non-terminal dense layer applies ReLU activation function and L2 regularization; <br>
+
+The defined model is trained and validated with `BATCH_SIZE=64`. Two strategies can be followed:
+1. Working with smaller datasets (data augmentation strategy 1), the model is subjected to K-fold validation (with K=4), being trained 3 epochs for each fold;
+2. Working with larger datasets (data augmentation strategy 2), the model is trained for 5 epochs and then validated on the previously held-out validation set; <br>
+
+For both strategies, loss function and accuracy are displayed as training and validation metrics. <br> 
+Finally, the model is tested on both the held-out test set and the test sets assembled in the *`DataAugmentation&Preprocessing.ipynb`* notebook. The following testing metrics are shown: **Loss**, **Accuracy**, **Precision**, **Recall**, **F1-Score**, **Confusion Matrix**, **ROC (Receiver Operating Characteristic) Curve**, **AUC (Area Under ROC Curve)**.
 
 ---
 
-## 🔧 Hyperparameter Optimization and Tuning
-The LSTM_NetworkDAIGT_Tuning.ipynb performs model optimization via hyperparameter tuning using the keras tuner library. Many operations performed in the notebook LSTM_NetworkDAIGT.ipynb are replicated (dataset loading and splitting, text vectorization and embedding, model architecture definition). 
-The search for optimal hyperparameter configurations is automated by the Hyperband function of keras tuner, which adopts a GridSerach algorithm to find the best combinations (i.e. those maximizing validation accuracy). Key hyperparameters are optimized individually in sequential order:
-•	Embedding dimensionality (300, 1200, 2400, 3000, 4200);
-•	Number of additional bidirectional LSTM layers (0 to 2);
-•	Number of additional dense layers (0 to 2);
-•	Dimensionality of LSTM units (8, 16, 32, 64);
-•	Dropout rate for LSTM layers (0.25 or 0.5) and the addition of a traditional dropout layer;
-The keras_tuner library automatically saves a summary of the tuning process for each hyperparameter:
-•	Summary: information about each trial, including the hyperparameter value, number of training epochs (we have selected 2 training epochs for tuning), and trial accuracy score are saved in .txt format;
-•	Best Value: the best hyperparameters configuration is saved in .json format;
-•	Best model: the tuner saves the weights of the best-performing models encountered during the search, retrieved using tuner.get_best_models();
+## 🔧 Hyperparameters Optimization and Tuning
+The *`LSTM_NetworkDAIGT_Tuning.ipynb`* performs model optimization via hyperparameter tuning using the Keras Tuner library. Many operations performed in the notebook *`LSTM_NetworkDAIGT.ipynb`* are replicated (dataset loading and splitting, text vectorization and embedding, model architecture definition). <br>
+The search for optimal hyperparameter configurations is automated by the `Hyperband` function of Keras Tuner, which adopts a **GridSearch** algorithm to find the best combinations (i.e. those maximizing validation accuracy). Key hyperparameters are optimized individually in sequential order:
+- Embedding dimensionality (300, 1200, 2400, 3000, 4200);
+- Number of additional bidirectional LSTM layers (0 to 2);
+- Number of additional dense layers (0 to 2);
+- Dimensionality of LSTM units (8, 16, 32, 64);
+- Dropout rate for LSTM layers (0.25 or 0.5) and the addition of a traditional dropout layer; <br>
+
+The Keras_Tuner library automatically saves a summary of the tuning process for each hyperparameter:
+- **Summary:** information about each trial, including the hyperparameter value, number of training epochs (we have selected 2 training epochs for tuning), and trial accuracy score are saved in `.txt` format;
+- **Best Value:** the best hyperparameters configuration is saved in `.json` format;
+- **Best model:** the tuner saves the weights of the best-performing models encountered during the search, retrieved using `tuner.get_best_models()`;
 
 ---
 
 ## 📈 Results and Performance
-The tuned model was trained, validated, and tested on 12 different versions of the training sets, resulting from the combination of 2 data augmentation strategies and 6 different pre-processing strategies. Both traning/validation history and testing results for each attempt have been saved into .csv format.
-Notebook Results Summary.ipynb compares histories and test results of all attempts.
-The approach with a larger dataset (data augmentation strategy 2) and hold-out validation showed more stable behavior during training and validation, despite slightly lower absolute scores compared to the approach with a smaller dataset (data augmentation strategy 1) and K-fold validation, which suffered from overfitting.
-Specifically, the SWL pre-processing combination (baseline + stop words removal + lemmatization) achieved the best overall results in terms of accuracy and generalization capability.
+The tuned model was trained, validated, and tested on 12 different versions of the training sets, resulting from the combination of 2 data augmentation strategies and 6 different pre-processing strategies. Both traning/validation history and testing results for each attempt have been saved into `.csv` format. <br>
+Notebook *`Results Summary.ipynb`* compares histories and test results of all attempts. <br>
+The approach with a larger dataset (data augmentation strategy 2) and hold-out validation showed more stable behavior during training and validation, despite slightly lower absolute scores compared to the approach with a smaller dataset (data augmentation strategy 1) and K-fold validation, which suffered from overfitting. <br>
+Specifically, the **SWL** pre-processing combination (baseline + stop words removal + lemmatization) achieved the best overall results in terms of accuracy and generalization capability.
 
 --- 
 
@@ -111,8 +115,9 @@ Specifically, the SWL pre-processing combination (baseline + stop words removal 
 ## 🎓 Credits 
 This project has been realized as assignment for the course of Deep Learning, A.A. 2023-2024
 
-Co-authored by: Antonella Fortuna <antonellafortuna32@gmail.com>
-Co-authored by: Michele Barbieri <michele.barbieri99@gmail.com>
+Co-authored by: <br> 
+- Antonella Fortuna <antonellafortuna32@gmail.com>
+- Michele Barbieri <michele.barbieri99@gmail.com>
 
 Master Degree in ARTIFICIAL INTELLIGENCE AND COMPUTER SCIENCE
 
