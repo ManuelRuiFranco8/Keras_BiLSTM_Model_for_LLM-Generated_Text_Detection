@@ -1,0 +1,40 @@
+Results summary
+Results in /content/drive/MyDrive/DL/Project/Trained_Models/tuningUnitsSummary
+Showing 10 best trials
+Objective(name="val_acc", direction="max")
+
+Trial 0002 summary
+Hyperparameters:
+LSTM_units: 64
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 1
+tuner/round: 0
+Score: 0.9652174115180969
+
+Trial 0003 summary
+Hyperparameters:
+LSTM_units: 32
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 1
+tuner/round: 0
+Score: 0.9635869860649109
+
+Trial 0001 summary
+Hyperparameters:
+LSTM_units: 16
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 1
+tuner/round: 0
+Score: 0.9601902365684509
+
+Trial 0000 summary
+Hyperparameters:
+LSTM_units: 8
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 1
+tuner/round: 0
+Score: 0.9538043737411499

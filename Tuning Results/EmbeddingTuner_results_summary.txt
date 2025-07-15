@@ -1,0 +1,69 @@
+Results summary
+Results in /content/drive/MyDrive/DL/Project/Trained_Models/tuningEmbSummary
+Showing 10 best trials
+Objective(name="val_acc", direction="max")
+
+Trial 0005 summary
+Hyperparameters:
+dim_emb: 300
+tuner/epochs: 5
+tuner/initial_epoch: 2
+tuner/bracket: 1
+tuner/round: 1
+tuner/trial_id: 0003
+Score: 0.972690224647522
+
+Trial 0006 summary
+Hyperparameters:
+dim_emb: 3000
+tuner/epochs: 5
+tuner/initial_epoch: 2
+tuner/bracket: 1
+tuner/round: 1
+tuner/trial_id: 0004
+Score: 0.964266300201416
+
+Trial 0003 summary
+Hyperparameters:
+dim_emb: 300
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 1
+tuner/round: 0
+Score: 0.9616847634315491
+
+Trial 0004 summary
+Hyperparameters:
+dim_emb: 3000
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 1
+tuner/round: 0
+Score: 0.961005449295044
+
+Trial 0001 summary
+Hyperparameters:
+dim_emb: 2400
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 1
+tuner/round: 0
+Score: 0.959782600402832
+
+Trial 0002 summary
+Hyperparameters:
+dim_emb: 4200
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 1
+tuner/round: 0
+Score: 0.9580162763595581
+
+Trial 0000 summary
+Hyperparameters:
+dim_emb: 1200
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 1
+tuner/round: 0
+Score: 0.9569293260574341

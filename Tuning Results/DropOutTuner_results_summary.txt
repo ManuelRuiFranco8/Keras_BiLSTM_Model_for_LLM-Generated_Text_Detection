@@ -1,0 +1,44 @@
+Results summary
+Results in /content/drive/MyDrive/DL/Project/Trained_Models/tuningDropOutSummary
+Showing 10 best trials
+Objective(name="val_acc", direction="max")
+
+Trial 0002 summary
+Hyperparameters:
+drop_rate: 0.25
+add_final_dropout: True
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 2
+tuner/round: 0
+Score: 0.9646739363670349
+
+Trial 0000 summary
+Hyperparameters:
+drop_rate: 0.5
+add_final_dropout: False
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 2
+tuner/round: 0
+Score: 0.9627717137336731
+
+Trial 0001 summary
+Hyperparameters:
+drop_rate: 0.25
+add_final_dropout: False
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 2
+tuner/round: 0
+Score: 0.961005449295044
+
+Trial 0003 summary
+Hyperparameters:
+drop_rate: 0.5
+add_final_dropout: True
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 2
+tuner/round: 0
+Score: 0.9607337117195129

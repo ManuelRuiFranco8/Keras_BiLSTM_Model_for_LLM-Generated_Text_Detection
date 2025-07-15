@@ -1,0 +1,106 @@
+Results summary
+Results in /content/drive/MyDrive/DL/Project/Trained_Models/tuningLayersSummary
+Showing 10 best trials
+Objective(name="val_acc", direction="max")
+
+Trial 0006 summary
+Hyperparameters:
+num_LSTM_layers: 2
+num_dense_layers: 0
+tuner/epochs: 5
+tuner/initial_epoch: 2
+tuner/bracket: 1
+tuner/round: 1
+tuner/trial_id: 0002
+Score: 0.965081512928009
+
+Trial 0005 summary
+Hyperparameters:
+num_LSTM_layers: 0
+num_dense_layers: 0
+tuner/epochs: 5
+tuner/initial_epoch: 2
+tuner/bracket: 1
+tuner/round: 1
+tuner/trial_id: 0000
+Score: 0.9646739363670349
+
+Trial 0008 summary
+Hyperparameters:
+num_LSTM_layers: 1
+num_dense_layers: 0
+tuner/epochs: 5
+tuner/initial_epoch: 0
+tuner/bracket: 0
+tuner/round: 0
+Score: 0.9627717137336731
+
+Trial 0009 summary
+Hyperparameters:
+num_LSTM_layers: 2
+num_dense_layers: 2
+tuner/epochs: 5
+tuner/initial_epoch: 0
+tuner/bracket: 0
+tuner/round: 0
+Score: 0.961005449295044
+
+Trial 0000 summary
+Hyperparameters:
+num_LSTM_layers: 0
+num_dense_layers: 0
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 1
+tuner/round: 0
+Score: 0.9599184989929199
+
+Trial 0007 summary
+Hyperparameters:
+num_LSTM_layers: 0
+num_dense_layers: 2
+tuner/epochs: 5
+tuner/initial_epoch: 0
+tuner/bracket: 0
+tuner/round: 0
+Score: 0.959782600402832
+
+Trial 0002 summary
+Hyperparameters:
+num_LSTM_layers: 2
+num_dense_layers: 0
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 1
+tuner/round: 0
+Score: 0.957880437374115
+
+Trial 0004 summary
+Hyperparameters:
+num_LSTM_layers: 2
+num_dense_layers: 1
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 1
+tuner/round: 0
+Score: 0.9566575884819031
+
+Trial 0003 summary
+Hyperparameters:
+num_LSTM_layers: 1
+num_dense_layers: 1
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 1
+tuner/round: 0
+Score: 0.955570638179779
+
+Trial 0001 summary
+Hyperparameters:
+num_LSTM_layers: 1
+num_dense_layers: 2
+tuner/epochs: 2
+tuner/initial_epoch: 0
+tuner/bracket: 1
+tuner/round: 0
+Score: 0.952038049697876
